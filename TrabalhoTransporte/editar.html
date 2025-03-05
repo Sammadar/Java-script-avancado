@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajuste de Transporte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/80793a8067.js" defer crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="bg-dark p-2">
+        <a href="/TrabalhoTransporte/index.html" class="btn btn-outline-info"><i class="fas fa-home"></i> Home</a>
+    </header>
+
+    <div class="text-center">
+        <h1 class="text-primary">Ajuste de cadastro de Transporte</h1>
+    </div>
+
+    <form action="/ajuste-transporte" method="PUT" class="p-3">
+        <div>
+            <label for="campoVeiculo" class="form-label">Veículo</label>
+            <input type="text" id="campoVeiculo" class="form-control" required aria-label="Veiculo">
+        </div>
+        <div>
+            <label for="campoMotorista" class="form-label">Motorista</label>
+            <input type="text" id="campoMotorista" class="form-control" required aria-label="Nome do motorista">
+        </div>
+        <div>
+            <label for="campoCarga" class="form-label">Carga</label>
+            <input type="number" id="campoCarga" class="form-control" required aria-label="Carga">
+        </div>
+        <div>
+            <label for="campoPesoCarga" class="form-label">Peso Carga</label>
+            <input type="number" id="campoPesoCarga" class="form-control" required aria-label="Peso da carga">
+        </div>
+        <div>
+            <label for="campoDestino" class="form-label">Destino</label>
+            <input type="text" id="campoDestino" class="form-control" required aria-label="Destino">
+        </div>
+        <div>
+            <label for="campoTempoEstimado" class="form-label">Tempo Estimado</label>
+            <input type="number" id="campoTempoEstimado" class="form-control" required aria-label="Tempo estimado">
+        </div>
+
+        <div class="text-end mt-2">
+            <button type="submit" class="btn btn-success" id="btn-ajustar"><i class="fas fa-floppy-disk"></i> Ajustar</button> 
+        </div>
+    </form>
+
+    <script src="https://unpkg.com/imask"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/scriptTransporte/editar.js"></script>
