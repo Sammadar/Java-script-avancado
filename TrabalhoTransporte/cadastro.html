@@ -21,27 +21,27 @@
     <form action="/cadastrar-transporte" method="POST" class="p-3">
         <div>
             <label for="campoVeiculo" class="form-label">Veículo</label>
-            <input type="text" id="campoVeiculo" class="form-control" required aria-label="Veiculo">
+            <input type="text" id="campoVeiculo" class="form-control" required aria-label="Veiculo" placeholder="Ex: Ferrari">
         </div>
         <div>
             <label for="campoMotorista" class="form-label">Motorista</label>
-            <input type="text" id="campoMotorista" class="form-control" required aria-label="Nome do motorista">
+            <input type="text" id="campoMotorista" class="form-control" required aria-label="Nome do motorista" placeholder="Ex: Josué">
         </div>
         <div>
             <label for="campoCarga" class="form-label">Carga</label>
-            <input type="number" id="campoCarga" class="form-control" required aria-label="Carga">
+            <input type="text" id="campoCarga" class="form-control" required aria-label="Carga" placeholder="Ex: Eletrônicos">
         </div>
         <div>
             <label for="campoPesoCarga" class="form-label">Peso Carga</label>
-            <input type="number" id="campoPesoCarga" class="form-control" required aria-label="Peso da carga">
+            <input type="number" id="campoPesoCarga" class="form-control" required aria-label="Peso da carga" step="any" placeholder="Ex: 100">
         </div>
         <div>
             <label for="campoDestino" class="form-label">Destino</label>
-            <input type="text" id="campoDestino" class="form-control" required aria-label="Destino">
+            <input type="text" id="campoDestino" class="form-control" required aria-label="Destino" placeholder="Ex: São Paulo">
         </div>
         <div>
             <label for="campoTempoEstimado" class="form-label">Tempo Estimado</label>
-            <input type="number" id="campoTempoEstimado" class="form-control" required aria-label="Tempo estimado">
+            <input type="text" id="campoTempoEstimado" class="form-control" required aria-label="Tempo estimado" placeholder="Ex: 12h">
         </div>
 
         <div class="text-end mt-2">
@@ -54,3 +54,5 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="/scriptTransporte/cadastrar.js"></script>
+</body>
+</html>

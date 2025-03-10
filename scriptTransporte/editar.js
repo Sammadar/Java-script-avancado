@@ -4,38 +4,47 @@ const campoCarga = document.getElementById("campoCarga");
 const campoPesoCarga = document.getElementById("campoPesoCarga");
 const campoDestino = document.getElementById("campoDestino");
 const campoTempoEstimado = document.getElementById("campoTempoEstimado");
-const urlAPI = "https://public.franciscosensaulas.com";
+const feedback = document.getElementById("feedback");
+const botaoEditar = document.getElementById("btn-ajustar");
 
+const urlAPI = "https://public.franciscosensaulas.com";
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
 const idParaEditar = params.get("id");
 
+
 async function consultarDadosTransportePorId() {
     const urlParaConsultarTransporte = `${urlAPI}/api/v1/trabalho/transportes/${idParaEditar}`;
-    console.log(urlParaConsultarTransporte);
     const resposta = await fetch(urlParaConsultarTransporte);
 
     if (!resposta.ok) {
-        alert("Cadastro de transporte não encontrada");
+        alert("Cadastro de transporte não encontrado");
         window.location.href = "/TrabalhoTransporte/index.html";
         return;
     }
 
     const dadosTransporte = await resposta.json();
-    console.log(dadosTransporte );
 
 
-    campoVeiculo.value = dadosTransporte .Veiculo;
-    campoMotorista.value = dadosTransporte .Motorista;
-    campoCarga.value = dadosTransporte .Carga;
-    campoPesoCarga.value = dadosTransporte .PesoCarga;
-    campoDestino.value = dadosTransporte .Destino;
-    campoTempoEstimado.value = dadosTransporte .TempoEstimado;
+    campoVeiculo.value = dadosTransporte.veiculo;
+    campoMotorista.value = dadosTransporte.motorista;
+    campoCarga.value = dadosTransporte.carga;
+    campoPesoCarga.value = dadosTransporte.pesoCarga;
+    campoDestino.value = dadosTransporte.destino;
+    campoTempoEstimado.value = dadosTransporte.tempoEstimadoHoras;
+
+
+    botaoEditar.disabled = false;
 }
 
 async function editar(evento) {
     evento.preventDefault();
 
+
+    if (!campoVeiculo.value || !campoMotorista.value || !campoCarga.value || !campoPesoCarga.value || !campoDestino.value || !campoTempoEstimado.value) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
 
     let Veiculo = campoVeiculo.value;
     let Motorista = campoMotorista.value;
@@ -45,13 +54,16 @@ async function editar(evento) {
     let TempoEstimado = campoTempoEstimado.value;
 
     const dados = {
-        Veiculo: Veiculo,
-        Motorista: Motorista,
-        Carga: Carga,
-        PesoCarga: PesoCarga,
-        Destino: Destino,
-        TempoEstimado: TempoEstimado
+        veiculo: Veiculo,
+        motorista: Motorista,
+        carga: Carga,
+        pesoCarga: PesoCarga,
+        destino: Destino,
+        tempoEstimadoHoras: TempoEstimado
     };
+
+
+    feedback.innerHTML = "Atualizando...";
 
 
     let url = `${urlAPI}/api/v1/trabalho/transportes/${idParaEditar}`;
@@ -61,17 +73,45 @@ async function editar(evento) {
         body: JSON.stringify(dados)
     });
 
+
     if (!resposta.ok) {
         const erro = await resposta.json();
         alert(erro.message || "Não foi possível alterar");
     } else {
-        location.href = '/TrabalhoTransporte/index.html';
+        feedback.innerHTML = "<strong>Cadastro atualizado com sucesso!</strong>";
+        setTimeout(() => {
+            location.href = '/TrabalhoTransporte/index.html';
+        }, 2000);
     }
 }
 
 
-const botaoEditar = document.getElementById("btn-ajustar");
 botaoEditar.addEventListener("click", editar);
 
 
 consultarDadosTransportePorId();
+
+
+function aplicarMascaras() {
+
+    IMask(document.getElementById('campoPesoCarga'), {
+        mask: Number,
+        min: 0,
+        max: 999999,
+        thousandsSeparator: '.',
+        radix: ',',
+        mapToRadix: ['.']
+    });
+
+
+    IMask(document.getElementById('campoTempoEstimado'), {
+        mask: '00:00',
+        blocks: {
+            '00': { mask: IMask.MaskedRange, from: 0, to: 23 },
+            '00': { mask: IMask.MaskedRange, from: 0, to: 59 },
+        }
+    });
+}
+
+
+window.onload = aplicarMascaras;
